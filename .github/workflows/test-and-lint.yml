@@ -38,7 +38,7 @@ jobs:
             - name: code checkout
               uses: actions/checkout@v4
             - name: terraform init, validate and format code 
-            # flaga do backendu false jest po to zeby nie zuzywac zasobow przy init
+            # flaga do backendu false jest po to zeby nie zuzywac zasobow przy init , sprawdz ta flage -check do fmt bo wywala jak cos nie jest zfmt
               run: |
                 cd infra/
                 docker compose run --rm terraform -chdir=deploy/ init -backend=false
