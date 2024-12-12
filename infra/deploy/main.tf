@@ -1,18 +1,18 @@
 terraform {
   required_providers {
     aws = {
-        source = "hashicorp/aws"
-        version = "5.23.0"
+      source  = "hashicorp/aws"
+      version = "5.23.0"
     }
   }
 
-   backend "s3" {
-    bucket         = "devops-farmacy-app-tf-state"
-    key            = "tf-state-deploy"
+  backend "s3" {
+    bucket               = "devops-farmacy-app-tf-state"
+    key                  = "tf-state-deploy"
     workspace_key_prefix = "tf-state-deploy-env"
-    region         = "eu-central-1"
-    encrypt        = true
-    dynamodb_table = "devops-farmacy-app-tf-lock"
+    region               = "eu-central-1"
+    encrypt              = true
+    dynamodb_table       = "devops-farmacy-app-tf-lock"
   }
 
 }
@@ -22,9 +22,9 @@ provider "aws" {
   default_tags {
     tags = {
       Environment = terraform.workspace
-      Project = var.project
-      Contact = var.contact
-      ManageBy = "Terraform/deploy"
+      Project     = var.project
+      Contact     = var.contact
+      ManageBy    = "Terraform/deploy"
     }
   }
 }
