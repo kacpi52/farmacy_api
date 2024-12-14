@@ -85,7 +85,7 @@ resource "aws_iam_user_policy_attachment" "ecr" {
   policy_arn = aws_iam_policy.ecr.arn
 }
 
-#########################
+# ec2 policy 
 
 data "aws_iam_policy_document" "ec2" {
   statement {
