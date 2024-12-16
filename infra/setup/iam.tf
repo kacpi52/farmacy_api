@@ -127,6 +127,7 @@ data "aws_iam_policy_document" "ec2" {
       "ec2:AttachInternetGateway",
       "ec2:ModifyVpcAttribute",
       "ec2:RevokeSecurityGroupIngress",
+      "ec2:DescribeAvailabilityZones",
     ]
     resources = ["*"]
   }
@@ -145,24 +146,32 @@ resource "aws_iam_user_policy_attachment" "ec2" {
 
 # rds access policy for user 
 
+# data "aws_iam_policy_document" "rds" {
+#   statement {
+#     effect = "Allow"
+#     actions = [
+#       "rds:DescribeDBSubnetGroups",
+#       "rds:DescribeDBInstances",
+#       "rds:CreateDBSubnetGroup",
+#       "rds:DeleteDBSubnetGroup",
+#       "rds:CreateDBInstance",
+#       "rds:DeleteDBInstance",
+#       "rds:ListTagsForResource",
+#       "rds:ModifyDBInstance",
+#       "rds:AddTagsToResource"
+#     ]
+#     resources = ["*"]
+#   }
+# }
 data "aws_iam_policy_document" "rds" {
   statement {
     effect = "Allow"
     actions = [
-      "rds:DescribeDBSubnetGroups",
-      "rds:DescribeDBInstances",
-      "rds:CreateDBSubnetGroup",
-      "rds:DeleteDBSubnetGroup",
-      "rds:CreateDBInstance",
-      "rds:DeleteDBInstance",
-      "rds:ListTagsForResource",
-      "rds:ModifyDBInstance",
-      "rds:AddTagsToResource"
+      "rds:*"
     ]
     resources = ["*"]
   }
 }
-
 resource "aws_iam_policy" "rds" {
   name        = "${aws_iam_user.cd.name}-rds"
   description = "Allow user to manage RDS resources."
