@@ -26,7 +26,6 @@ As a result, most processes—such as resource creation, configuration, and depl
 - S3 - Object storage service.
 - ECR - Container registry for Docker images.
 - ECS - Managed container orchestration service.
-- EFS - Shared file storage in the cloud.
 - CloudWatch - Monitoring and logging for applications and infrastructure.
 - Route 53 - DNS management service.
 - VPC - Virtual Private Cloud for resource isolation.
