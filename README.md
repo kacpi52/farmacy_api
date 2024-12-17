@@ -15,22 +15,23 @@ As a result, most processes—such as resource creation, configuration, and depl
 
 ### technologies and services used in this project
 
-Terraform - Infrastructure as Code (IaC) automation.
-GitHub Actions - CI/CD pipeline for deployment automation.
-Docker - Application containerization.
-Docker Compose - Orchestration of containers in local development environments.
+- Terraform - Infrastructure as Code (IaC) automation.
+- GitHub Actions - CI/CD pipeline for deployment automation.
+- Docker - Application containerization.
+- Docker Compose - Orchestration of containers in local development environments.
 
-AWS Services
+### AWS Services
 
-DynamoDB - NoSQL database.
-S3 - Object storage service.
-ECR - Container registry for Docker images.
-ECS - Managed container orchestration service.
-EFS - Shared file storage in the cloud.
-CloudWatch - Monitoring and logging for applications and infrastructure.
-Route 53 - DNS management service.
-VPC - Virtual Private Cloud for resource isolation.
-RDS - Managed SQL database service.
+- DynamoDB - NoSQL database.
+- S3 - Object storage service.
+- ECR - Container registry for Docker images.
+- ECS - Managed container orchestration service.
+- EFS - Shared file storage in the cloud.
+- CloudWatch - Monitoring and logging for applications and infrastructure.
+- Route 53 - DNS management service.
+- VPC - Virtual Private Cloud for resource isolation.
+- RDS - Managed SQL database service
+- Load Balancer - traffic managment
 
 ### Running Project Locally
 
@@ -99,7 +100,9 @@ Secrets:
 - `TF_VAR_DB_PASSWORD`: Password for the RDS database (make something up).
 - `TF_VAR_DJANGO_SECRET_KEY`: Secret key for the Django app (make something up).
 
+
 # To trigger the CI/CD process, you simply need to merge a Pull Request into the main or prod branch, or commit directly to main/prod.
+
 
 
 #### Section Notes and Resources

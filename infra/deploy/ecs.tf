@@ -90,13 +90,20 @@ resource "aws_ecs_task_definition" "api" {
             value = "*"
           }
         ]
+
         mountPoints = [
           {
             readOnly      = false
             containerPath = "/vol/web/static"
             sourceVolume  = "static"
+          },
+          {
+            readOnly      = false
+            containerPath = "/vol/web/media"
+            sourceVolume  = "efs-media"
           }
-        ],
+        ]
+
         logConfiguration = {
           logDriver = "awslogs"
           options = {
@@ -124,13 +131,20 @@ resource "aws_ecs_task_definition" "api" {
             value = "127.0.0.1"
           }
         ]
+
         mountPoints = [
           {
             readOnly      = true
             containerPath = "/vol/static"
             sourceVolume  = "static"
+          },
+          {
+            readOnly      = true
+            containerPath = "/vol/media"
+            sourceVolume  = "efs-media"
           }
         ]
+
         logConfiguration = {
           logDriver = "awslogs"
           options = {
@@ -146,7 +160,18 @@ resource "aws_ecs_task_definition" "api" {
   volume {
     name = "static"
   }
+  volume {
+    name = "efs-media"
+    efs_volume_configuration {
+      file_system_id     = aws_efs_file_system.media.id
+      transit_encryption = "ENABLED"
 
+      authorization_config {
+        access_point_id = aws_efs_access_point.media.id
+        iam             = "DISABLED"
+      }
+    }
+  }
   runtime_platform {
     operating_system_family = "LINUX"
     cpu_architecture        = "X86_64"
@@ -176,7 +201,16 @@ resource "aws_security_group" "ecs_service" {
       aws_subnet.private_b.cidr_block,
     ]
   }
-
+  # port for efs volumes 
+  egress {
+    from_port = 2049
+    to_port   = 2049
+    protocol  = "tcp"
+    cidr_blocks = [
+      aws_subnet.private_a.cidr_block,
+      aws_subnet.private_b.cidr_block,
+    ]
+  }
   # HTTP inbound access
   ingress {
     from_port = 8000
@@ -205,13 +239,17 @@ resource "aws_ecs_service" "api" {
   enable_execute_command = true
 
   network_configuration {
-    assign_public_ip = true
-
     subnets = [
-      aws_subnet.public_a.id,
-      aws_subnet.public_b.id
+      aws_subnet.private_a.id,
+      aws_subnet.private_b.id
     ]
 
     security_groups = [aws_security_group.ecs_service.id]
+  }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.api.arn
+    container_name   = "proxy"
+    container_port   = 8000
   }
 }
