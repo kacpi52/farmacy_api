@@ -179,16 +179,21 @@ resource "aws_security_group" "ecs_service" {
 
   # HTTP inbound access
   ingress {
-    from_port   = 8000
-    to_port     = 8000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port = 8000
+    to_port   = 8000
+    protocol  = "tcp"
+    security_groups = [
+      aws_security_group.lb.id
+    ]
   }
 }
 
 # ecs service 
 resource "aws_iam_service_linked_role" "ecs" {
   aws_service_name = "ecs.amazonaws.com"
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 resource "aws_ecs_service" "api" {
   name                   = "${local.prefix}-api"
