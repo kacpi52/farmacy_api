@@ -1,5 +1,5 @@
 data "aws_route53_zone" "zone" {
-  name = "${var.dns_zone_name}."
+  zone_id = "Z03100557OBKLTITR8GZ"
 }
 
 resource "aws_route53_record" "app" {
