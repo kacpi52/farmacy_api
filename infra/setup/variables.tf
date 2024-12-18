@@ -17,3 +17,4 @@ variable "contact" {
   description = "contact name for tagging resources"
   default     = "kacdevtest@gmail.com"
 }
+

@@ -196,7 +196,7 @@ resource "aws_security_group" "ecs_service" {
 resource "aws_iam_service_linked_role" "ecs" {
   aws_service_name = "ecs.amazonaws.com"
   lifecycle {
-    prevent_destroy = true
+    ignore_changes = all
   }
 }
 resource "aws_ecs_service" "api" {

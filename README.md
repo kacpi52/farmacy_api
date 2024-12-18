@@ -12,6 +12,7 @@ Setup Folder: Creates a dedicated AWS user for CI/CD operations on GitHub Action
 Deploy Folder: Handles the automated provisioning of the rest of the infrastructure via CI/CD pipelines.
 As a result, most processes—such as resource creation, configuration, and deployment—are fully automated through the CI/CD pipeline.
 
+> Note: My cloud infrastructure is shutted down to not generate costs.
 
 ### technologies and services used in this project
 
@@ -102,7 +103,7 @@ Secrets:
 
 # To trigger the CI/CD process, you simply need to merge a Pull Request into the main or prod branch, or commit directly to main/prod.
 
-
+## To destroy AWS infrastructure run "destroy terraform infra" action 
 
 #### Section Notes and Resources
 This project contains the starter django app  from  (https://londonapp.dev).
