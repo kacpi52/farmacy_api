@@ -48,7 +48,7 @@ docker compose up
 ### Running Project
 
 #### Create admin user via  IAM Center
-Log as root user and create user via IAM Center , then use credentials for aws cli authentication
+Log as root user and create user via IAM Center , then use credentials for aws cli authentication, you also have to manually create hosted zone in Route53. 
 
 #### AWS CLI Authentication
 
