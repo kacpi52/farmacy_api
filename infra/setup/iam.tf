@@ -233,13 +233,13 @@ resource "aws_iam_user_policy_attachment" "ecs" {
   user       = aws_iam_user.cd.name
   policy_arn = aws_iam_policy.ecs.arn
 }
-
-resource "aws_iam_service_linked_role" "ecs" {
-  aws_service_name = "ecs.amazonaws.com"
-  lifecycle {
-    ignore_changes = all
-  }
-}
+# currently on deploy/ecs.tf 
+# resource "aws_iam_service_linked_role" "ecs" {
+#   aws_service_name = "ecs.amazonaws.com"
+#   lifecycle {
+#     ignore_changes = all
+#   }
+# }
 # policy for iam access
 
 data "aws_iam_policy_document" "iam" {
