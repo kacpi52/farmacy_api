@@ -37,7 +37,7 @@ variable "django_secret_key" {
 
 variable "dns_zone_name" {
   description = "Domain name"
-  default     = "londonappdev.net"
+  default     = "carfitment.pl"
 }
 
 variable "subdomain" {
